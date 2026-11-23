@@ -1,0 +1,167 @@
+@model MyMvcApp.Models.MedicalEquipment
+
+@{
+    ViewData["Title"] = "Добавить медицинское оборудование";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <!-- Идентификация -->
+            <div class="mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Manufacturer" class="control-label"></label>
+                    <input asp-for="Manufacturer" class="form-control" />
+                    <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CountryOfOrigin" class="control-label"></label>
+                    <input asp-for="CountryOfOrigin" class="form-control" />
+                    <span asp-validation-for="CountryOfOrigin" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RegistrationNumber" class="control-label"></label>
+                    <input asp-for="RegistrationNumber" class="form-control" />
+                    <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Учётные данные -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SerialNumber" class="control-label"></label>
+                    <input asp-for="SerialNumber" class="form-control" />
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="InventoryNumber" class="control-label"></label>
+                    <input asp-for="InventoryNumber" class="form-control" />
+                    <span asp-validation-for="InventoryNumber" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Barcode" class="control-label"></label>
+                    <input asp-for="Barcode" class="form-control" />
+                    <span asp-validation-for="Barcode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Технические характеристики -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="InventoryType" class="control-label"></label>
+                    <input asp-for="InventoryType" class="form-control" />
+                    <span asp-validation-for="InventoryType" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="ClassRisk" class="control-label"></label>
+                    <input asp-for="ClassRisk" class="form-control" />
+                    <span asp-validation-for="ClassRisk" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="OkofCode" class="control-label"></label>
+                    <input asp-for="OkofCode" class="form-control" />
+                    <span asp-validation-for="OkofCode" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Эксплуатация -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="CommissioningDate" class="control-label"></label>
+                    <input asp-for="CommissioningDate" type="date" class="form-control" />
+                    <span asp-validation-for="CommissioningDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="DecommissioningDate" class="control-label"></label>
+                    <input asp-for="DecommissioningDate" type="date" class="form-control" />
+                    <span asp-validation-for="DecommissioningDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="Location" class="control-label"></label>
+                    <input asp-for="Location" class="form-control" />
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ResponsiblePerson" class="control-label"></label>
+                <input asp-for="ResponsiblePerson" class="form-control" />
+                <span asp-validation-for="ResponsiblePerson" class="text-danger"></span>
+            </div>
+
+            <!-- Обслуживание -->
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="LastMaintenanceDate" class="control-label"></label>
+                    <input asp-for="LastMaintenanceDate" type="date" class="form-control" />
+                    <span asp-validation-for="LastMaintenanceDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="NextMaintenanceDate" class="control-label"></label>
+                    <input asp-for="NextMaintenanceDate" type="date" class="form-control" />
+                    <span asp-validation-for="NextMaintenanceDate" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="MaintenanceNotes" class="control-label"></label>
+                    <input asp-for="MaintenanceNotes" class="form-control" />
+                    <span asp-validation-for="MaintenanceNotes" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Файлы и прочее -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ManualFilePath" class="control-label"></label>
+                    <input asp-for="ManualFilePath" class="form-control" placeholder="Путь к файлу или URL" />
+                    <span asp-validation-for="ManualFilePath" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="CertificateFilePath" class="control-label"></label>
+                    <input asp-for="CertificateFilePath" class="form-control" placeholder="Путь к файлу или URL" />
+                    <span asp-validation-for="CertificateFilePath" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="form-check mb-3">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label"></label>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Notes" class="control-label"></label>
+                <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="TechnicalSpecification" class="control-label"></label>
+                <textarea asp-for="TechnicalSpecification" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="TechnicalSpecification" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

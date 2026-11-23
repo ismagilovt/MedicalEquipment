@@ -1,0 +1,157 @@
+@model MyMvcApp.Models.MedicalEquipment
+
+@{
+    ViewData["Title"] = $"Детали: {Model?.Name ?? "Неизвестно"}";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-3">
+            <div class="card-header">
+                Общая информация
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Manufacturer)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Manufacturer)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Model)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Model)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.CountryOfOrigin)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.CountryOfOrigin)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.InventoryType)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.InventoryType)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.ClassRisk)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.ClassRisk)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                Учётные и регистрационные данные
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.RegistrationNumber)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.RegistrationNumber)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.SerialNumber)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.SerialNumber)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.InventoryNumber)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.InventoryNumber)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Barcode)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.Barcode)</dd>
+
+                    <dt class="col-sm-4">@Html.DisplayNameFor(model => model.OkofCode)</dt>
+                    <dd class="col-sm-8">@Html.DisplayFor(model => model.OkofCode)</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- Боковая панель: статусы и быстрые данные -->
+        <div class="card mb-3">
+            <div class="card-header bg-light">
+                Статус и местоположение
+            </div>
+            <div class="card-body">
+                <p>
+                    <strong>Статус:</strong> 
+                    @if (Model.IsActive)
+                    {
+                        <span class="badge bg-success">В эксплуатации</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Списано</span>
+                    }
+                </p>
+                <p><strong>Кабинет / подразделение:</strong> @Html.DisplayFor(model => model.Location)</p>
+                <p><strong>Ответственный:</strong> @Html.DisplayFor(model => model.ResponsiblePerson)</p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header bg-light">
+                Даты и обслуживание
+            </div>
+            <div class="card-body">
+                <p><strong>Дата ввода в эксплуатацию:</strong> 
+                    @(Model.CommissioningDate.HasValue ? Model.CommissioningDate.Value.ToString("dd.MM.yyyy") : "Не указана")
+                </p>
+                <p><strong>Дата списания:</strong> 
+                    @(Model.DecommissioningDate.HasValue ? Model.DecommissioningDate.Value.ToString("dd.MM.yyyy") : "-")
+                </p>
+                <p><strong>Последнее ТО:</strong> 
+                    @(Model.LastMaintenanceDate.HasValue ? Model.LastMaintenanceDate.Value.ToString("dd.MM.yyyy") : "Не проводилось")
+                </p>
+                <p><strong>Плановое ТО:</strong> 
+                    @(Model.NextMaintenanceDate.HasValue 
+                        ? Model.NextMaintenanceDate.Value.ToString("dd.MM.yyyy") 
+                        : "<span class='text-muted'>Не назначено</span>")
+                </p>
+                <p><strong>Примечания по обслуживанию:</strong><br>@Html.DisplayFor(model => model.MaintenanceNotes)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Технические характеристики и документы
+    </div>
+    <div class="card-body">
+        <p><strong>Краткое техописание / ТУ:</strong><br>@Html.DisplayFor(model => model.TechnicalSpecification)</p>
+        
+        <hr />
+
+        @if (!string.IsNullOrEmpty(Model.ManualFilePath))
+        {
+            <p>
+                <strong>Руководство по эксплуатации:</strong> 
+                <a href="@Model.ManualFilePath" target="_blank">Открыть файл</a>
+            </p>
+        }
+        else
+        {
+            <p><em>Путь к РЭ не указан</em></p>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.CertificateFilePath))
+        {
+            <p>
+                <strong>Сертификат / декларация:</strong> 
+                <a href="@Model.CertificateFilePath" target="_blank">Открыть файл</a>
+            </p>
+        }
+        else
+        {
+            <p><em>Путь к сертификату не указан</em></p>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Notes))
+        {
+            <hr />
+            <p><strong>Общие примечания:</strong><br>@Html.DisplayFor(model => model.Notes)</p>
+        }
+    </div>
+</div>
+
+<hr />
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">Вернуться к списку</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Изменить</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Удалить</a>
+</div>

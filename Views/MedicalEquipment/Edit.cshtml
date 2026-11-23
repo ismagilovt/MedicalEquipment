@@ -1,0 +1,210 @@
+@model MyMvcApp.Models.MedicalEquipment
+
+@{
+    ViewData["Title"] = "Редактировать оборудование";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Общая информация -->
+            <div class="card mb-3">
+                <div class="card-header">Общая информация</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Manufacturer" class="form-label"></label>
+                            <input asp-for="Manufacturer" class="form-control" />
+                            <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Model" class="form-label"></label>
+                            <input asp-for="Model" class="form-control" />
+                            <span asp-validation-for="Model" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CountryOfOrigin" class="form-label"></label>
+                            <input asp-for="CountryOfOrigin" class="form-control" />
+                            <span asp-validation-for="CountryOfOrigin" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="InventoryType" class="form-label"></label>
+                            <input asp-for="InventoryType" class="form-control" placeholder="Например: дефибриллятор, ИВЛ, УЗИ-аппарат" />
+                            <span asp-validation-for="InventoryType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ClassRisk" class="form-label"></label>
+                            <select asp-for="ClassRisk" class="form-select">
+                                <option value="">-- Выберите класс риска --</option>
+                                <option value="1">1 (низкий риск)</option>
+                                <option value="2а">2а (средний риск)</option>
+                                <option value="2б">2б (повышенный риск)</option>
+                                <option value="3">3 (высокий риск)</option>
+                            </select>
+                            <span asp-validation-for="ClassRisk" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="OkofCode" class="form-label"></label>
+                            <input asp-for="OkofCode" class="form-control" placeholder="Код ОКОФ" />
+                            <span asp-validation-for="OkofCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Учётные и регистрационные данные -->
+            <div class="card mb-3">
+                <div class="card-header">Учётные и регистрационные данные</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RegistrationNumber" class="form-label"></label>
+                            <input asp-for="RegistrationNumber" class="form-control" placeholder="Номер РУ" />
+                            <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="SerialNumber" class="form-label"></label>
+                            <input asp-for="SerialNumber" class="form-control" placeholder="Заводской номер" />
+                            <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="InventoryNumber" class="form-label"></label>
+                            <input asp-for="InventoryNumber" class="form-control" placeholder="Инвентарный номер МО" />
+                            <span asp-validation-for="InventoryNumber" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Barcode" class="form-label"></label>
+                            <input asp-for="Barcode" class="form-control" placeholder="Штрих‑код" />
+                            <span asp-validation-for="Barcode" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Эксплуатация и местоположение -->
+            <div class="card mb-3">
+                <div class="card-header">Эксплуатация и местоположение</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" placeholder="Кабинет / подразделение" />
+                            <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ResponsiblePerson" class="form-label"></label>
+                            <input asp-for="ResponsiblePerson" class="form-control" placeholder="ФИО ответственного сотрудника" />
+                            <span asp-validation-for="ResponsiblePerson" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CommissioningDate" class="form-label"></label>
+                            <input asp-for="CommissioningDate" type="date" class="form-control" />
+                            <span asp-validation-for="CommissioningDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="DecommissioningDate" class="form-label"></label>
+                            <input asp-for="DecommissioningDate" type="date" class="form-control" />
+                            <span asp-validation-for="DecommissioningDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+                        <label asp-for="IsActive" class="form-check-label">
+                            В эксплуатации (активно)
+                        </label>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Обслуживание и контроль -->
+            <div class="card mb-3">
+                <div class="card-header">Обслуживание и контроль</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LastMaintenanceDate" class="form-label"></label>
+                            <input asp-for="LastMaintenanceDate" type="date" class="form-control" />
+                            <span asp-validation-for="LastMaintenanceDate" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="NextMaintenanceDate" class="form-label"></label>
+                            <input asp-for="NextMaintenanceDate" type="date" class="form-control" />
+                            <span asp-validation-for="NextMaintenanceDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MaintenanceNotes" class="form-label"></label>
+                        <textarea asp-for="MaintenanceNotes" class="form-control" rows="3" placeholder="Примечания по обслуживанию"></textarea>
+                        <span asp-validation-for="MaintenanceNotes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Документы и примечания -->
+            <div class="card mb-3">
+                <div class="card-header">Документы и примечания</div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="TechnicalSpecification" class="form-label"></label>
+                        <textarea asp-for="TechnicalSpecification" class="form-control" rows="3" placeholder="Краткое техническое описание / ТУ"></textarea>
+                        <span asp-validation-for="TechnicalSpecification" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="ManualFilePath" class="form-label"></label>
+                            <input asp-for="ManualFilePath" class="form-control" placeholder="Путь к РЭ" />
+                            <span asp-validation-for="ManualFilePath" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CertificateFilePath" class="form-label"></label>
+                            <input asp-for="CertificateFilePath" class="form-control" placeholder="Путь к сертификату" />
+                            <span asp-validation-for="CertificateFilePath" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Notes" class="form-label"></label>
+                        <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Общие примечания"></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a asp-action="Index" class="btn btn-secondary me-md-2">Отмена</a>
+                <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
