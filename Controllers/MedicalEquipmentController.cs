@@ -17,10 +17,12 @@ namespace MyMvcApp.Controllers
         // GET: MedicalEquipment
         public async Task<IActionResult> Index()
         {
-            // Фильтруем только активное оборудование (не списанное)
-            var equipmentList = await _context.MedicalEquipments
-               // .Where(e => e.DecommissioningDate == null)
-                .ToListAsync();
+            // Сортируем в памяти по правилам русского языка: SQLite сортирует по кодам символов
+            // (заглавные отдельно от строчных, «Ё» не на своём месте). Данных — сотни строк, это дёшево.
+            var russian = StringComparer.Create(new System.Globalization.CultureInfo("ru-RU"), ignoreCase: true);
+            var equipmentList = (await _context.MedicalEquipments.AsNoTracking().ToListAsync())
+                .OrderBy(e => e.Name, russian)
+                .ToList();
 
             return View(equipmentList);
         }
@@ -47,16 +49,14 @@ namespace MyMvcApp.Controllers
         // POST: MedicalEquipment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Model, RegistrationNumber,Location,IsMeasurementDevice,MeasurementDeviceRegistrationNumber,MaintenanceDate,MaintenanceDocument,NextMaintenanceDate,DecommissioningDate,TechnicalSpecification,ClassRisk,OkofCode,InventoryNumber,SerialNumber,Barcode,InventoryType,Manufacturer,CountryOfOrigin,ResponsiblePerson,MaintenanceNotes,ManualFilePath,CertificateFilePath,Notes")] MedicalEquipment equipment)
+        public async Task<IActionResult> Create([Bind("Name,Manufacturer,Model,CountryOfOrigin,InventoryType,RegistrationNumber,SerialNumber,InventoryNumber,Barcode,ClassRisk,OkofCode,TechnicalSpecification,CommissioningDate,DecommissioningDate,Location,ResponsiblePerson,LastMaintenanceDate,NextMaintenanceDate,MaintenanceNotes,ManualFilePath,CertificateFilePath,IsActive,Notes")] MedicalEquipment equipment)
         {
-           Console.WriteLine(equipment);
-            //if (ModelState.IsValid)
-           // {
-                _context.Add(equipment);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            //}
-            return View(equipment);
+            if (!ModelState.IsValid)
+                return View(equipment);
+
+            _context.Add(equipment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: MedicalEquipment/Edit/5

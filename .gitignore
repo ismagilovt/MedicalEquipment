@@ -1,0 +1,13 @@
+bin/
+obj/
+publish/
+dist/
+.vs/
+.idea/
+*.user
+# рабочая база, бэкапы, документы и ключи — живут на флешке, не в git
+/UserData/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

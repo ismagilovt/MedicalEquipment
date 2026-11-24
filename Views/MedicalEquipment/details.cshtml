@@ -121,7 +121,7 @@
         {
             <p>
                 <strong>Руководство по эксплуатации:</strong> 
-                <a href="@Model.ManualFilePath" target="_blank">Открыть файл</a>
+                <a href="@DocUrl(Model.ManualFilePath)" target="_blank">Открыть файл</a>
             </p>
         }
         else
@@ -133,7 +133,7 @@
         {
             <p>
                 <strong>Сертификат / декларация:</strong> 
-                <a href="@Model.CertificateFilePath" target="_blank">Открыть файл</a>
+                <a href="@DocUrl(Model.CertificateFilePath)" target="_blank">Открыть файл</a>
             </p>
         }
         else
@@ -153,5 +153,22 @@
 <div class="mt-3">
     <a asp-action="Index" class="btn btn-secondary">Вернуться к списку</a>
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Изменить</a>
-    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Удалить</a>
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline"
+          data-name="@Model.Name" onsubmit="return confirmDelete(this.dataset.name)">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger">Удалить</button>
+    </form>
 </div>
+
+@functions {
+    // Относительный путь -> /docs/... (файлы лежат в UserData/docs рядом с exe); http(s)-ссылки — как есть.
+    static string? DocUrl(string? path)
+    {
+        if (string.IsNullOrWhiteSpace(path)) return null;
+        if (Uri.TryCreate(path, UriKind.Absolute, out var uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+            return path;
+        var segments = path.Replace('\\', '/').Split('/', StringSplitOptions.RemoveEmptyEntries)
+            .Select(Uri.EscapeDataString);
+        return "/docs/" + string.Join("/", segments);
+    }
+}
