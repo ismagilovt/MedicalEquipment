@@ -111,4 +111,9 @@ public class MedicalEquipment
     [StringLength(500)]
     [Display(Name = "Общие примечания")]
     public string? Notes { get; set; }
+
+     [StringLength(500)]
+    [Display(Name = "комплектуюшие")]
+    public string? Notes { get; set; }
+}
 }
