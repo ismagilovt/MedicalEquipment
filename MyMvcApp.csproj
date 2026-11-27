@@ -29,5 +29,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.10" />
   </ItemGroup>
 
+  <PropertyGroup>
+  <OutputType>WinExe</OutputType>
+  <TargetFramework>net8.0-windows</TargetFramework>
+  <ApplicationIcon>maris.ico</ApplicationIcon>
+</PropertyGroup>
+
+
 
 </Project>
