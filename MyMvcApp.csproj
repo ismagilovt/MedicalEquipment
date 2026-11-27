@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -6,17 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>MedicalEquipment</AssemblyName>
     <RootNamespace>MyMvcApp</RootNamespace>
-    <!-- Exe = видимое консольное окно: закрыть окно = выйти из программы -->
+    <!-- Exe = РІРёРґРёРјРѕРµ РєРѕРЅСЃРѕР»СЊРЅРѕРµ РѕРєРЅРѕ: Р·Р°РєСЂС‹С‚СЊ РѕРєРЅРѕ = РІС‹Р№С‚Рё РёР· РїСЂРѕРіСЂР°РјРјС‹ -->
     <OutputType>Exe</OutputType>
     <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
-  <!-- Portable-сборка для Windows: dotnet publish -c Release -r win-x64 (см. publish.sh / publish.cmd) -->
+  <!-- Portable-СЃР±РѕСЂРєР° РґР»СЏ Windows: dotnet publish -c Release -r win-x64 (СЃРј. publish.sh / publish.cmd) -->
   <PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
     <SelfContained>true</SelfContained>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <!-- Тримминг ломает EF Core в рантайме -->
+    <!-- РўСЂРёРјРјРёРЅРі Р»РѕРјР°РµС‚ EF Core РІ СЂР°РЅС‚Р°Р№РјРµ -->
     <PublishTrimmed>false</PublishTrimmed>
     <DebugType>none</DebugType>
   </PropertyGroup>
@@ -30,8 +30,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-  <OutputType>WinExe</OutputType>
-  <TargetFramework>net8.0-windows</TargetFramework>
   <ApplicationIcon>maris.ico</ApplicationIcon>
 </PropertyGroup>
 

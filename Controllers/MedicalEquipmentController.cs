@@ -49,7 +49,7 @@ namespace MyMvcApp.Controllers
         // POST: MedicalEquipment/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Manufacturer,Model,CountryOfOrigin,InventoryType,RegistrationNumber,SerialNumber,InventoryNumber,Barcode,ClassRisk,OkofCode,TechnicalSpecification,CommissioningDate,DecommissioningDate,Location,ResponsiblePerson,LastMaintenanceDate,NextMaintenanceDate,MaintenanceNotes,ManualFilePath,CertificateFilePath,IsActive,Notes")] MedicalEquipment equipment)
+        public async Task<IActionResult> Create([Bind("Name,Komplect,Manufacturer,Model,CountryOfOrigin,InventoryType,RegistrationNumber,SerialNumber,InventoryNumber,Barcode,ClassRisk,OkofCode,TechnicalSpecification,CommissioningDate,DecommissioningDate,Location,ResponsiblePerson,LastMaintenanceDate,NextMaintenanceDate,MaintenanceNotes,ManualFilePath,CertificateFilePath,IsActive,Notes")] MedicalEquipment equipment)
         {
             if (!ModelState.IsValid)
                 return View(equipment);
@@ -75,7 +75,7 @@ namespace MyMvcApp.Controllers
         // POST: MedicalEquipment/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Manufacturer,Model,CountryOfOrigin,InventoryType,RegistrationNumber,SerialNumber,InventoryNumber,Barcode,ClassRisk,OkofCode,TechnicalSpecification,CommissioningDate,DecommissioningDate,Location,ResponsiblePerson,LastMaintenanceDate,NextMaintenanceDate,MaintenanceNotes,ManualFilePath,CertificateFilePath,IsActive,Notes")] MedicalEquipment equipment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Komplect,Manufacturer,Model,CountryOfOrigin,InventoryType,RegistrationNumber,SerialNumber,InventoryNumber,Barcode,ClassRisk,OkofCode,TechnicalSpecification,CommissioningDate,DecommissioningDate,Location,ResponsiblePerson,LastMaintenanceDate,NextMaintenanceDate,MaintenanceNotes,ManualFilePath,CertificateFilePath,IsActive,Notes")] MedicalEquipment equipment)
         {
             if (id != equipment.Id)
                 return NotFound();

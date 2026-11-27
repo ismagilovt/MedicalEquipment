@@ -56,6 +56,10 @@ namespace MyMvcApp.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Komplect")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastMaintenanceDate")
                         .HasColumnType("TEXT");
 
